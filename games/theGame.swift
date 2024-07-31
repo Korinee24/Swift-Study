@@ -1,14 +1,18 @@
+//Creating function for getting user input
 func getUserChoice(userInput: String) -> String {
+  //create if statement for checking user input
   if userInput == "rock" || userInput == "paper" || userInput == "scissors" {
     return userInput
-  } else {
+  } else { // if user entered wrong input, it shows this message
     return "You can only enter rock, paper, or scissors. Try agin."
   }
 }
 
+//Declare function for getting computer input
 func getComputerChoice() -> String {
+  //getting number using random function
   let randomNumber = Int.random(in: 0...2)
-
+  //declare swithc for changing value 
   switch randomNumber {
     case 0:
       return "rock"
@@ -21,9 +25,11 @@ func getComputerChoice() -> String {
   }
 }
 
+//final function for checking who won from the game
 func determineWinner(_ userChoice: String,_ compChoice: String) -> String {
+  //declare variable with default value
   var decision = "It's a tie"
-
+  //declare switch for comparing user input and computer input
   switch userChoice {
     case "rock":
       if compChoice == "paper" {
@@ -50,10 +56,14 @@ func determineWinner(_ userChoice: String,_ compChoice: String) -> String {
   return decision
 }
 
+//adding user input to constant variable
 let userchoice = getUserChoice(userInput: "paper")
+//adding computer input to contant variable
 let compchoice = getComputerChoice()
 
+//print user input
 print("You threw \(userchoice)")
+//print computer input
 print("The computer threw \(compchoice)")
-
+//print who won!
 print(determineWinner(userchoice, compchoice))
