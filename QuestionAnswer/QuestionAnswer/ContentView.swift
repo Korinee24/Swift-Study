@@ -12,7 +12,7 @@ struct ContentView: View {
     let question = Question(questionText: "What was the first computer bug?", pssibleAnswer: ["Ant", "Beetle", "Moth", "Fly"], correctAnswerIndex: 2)
     
     //Define constant variable for colors
-    let mainColor = Color(red: 20/255, green: 28/255, blue: 58/255)
+    @State var mainColor = Color(red: 20/255, green: 28/255, blue: 58/255)
     let accentColor = Color(red: 48/255, green: 105/255, blue: 240/255)
     
     var body: some View {
@@ -33,33 +33,15 @@ struct ContentView: View {
                 Spacer()
                 //Answer Start
                 HStack{
-                    //Button 1
-                    Button(
-                    action: { print("Wrong Answer") },
-                    label: {
-                        ChoiceTextView(choiceText: question.pssibleAnswer[0])
+                    //Answer button refactor 2
+                    ForEach(0..<question.pssibleAnswer.count) { answerIndex in
+                        Button(action: {
+                            print("Tapped on option with the text: \(question.pssibleAnswer[answerIndex])")
+                          mainColor = answerIndex == question.correctAnswerIndex ? .green : .red
+                        }) {
+                            ChoiceTextView(choiceText: question.pssibleAnswer[answerIndex])
                         }
-                    );
-                    //Button 2
-                    Button(
-                        action: { print("Wrong Answer") },
-                        label: {
-                            ChoiceTextView(choiceText: question.pssibleAnswer[1])
-                        }
-                    );
-                    //Button 3
-                    Button(
-                        action: { print("Correct!") },
-                        label: {
-                            ChoiceTextView(choiceText: question.pssibleAnswer[2])
-                        }
-                    );
-                    Button(
-                        action: { print("Wrong Answer") },
-                        label: {
-                            ChoiceTextView(choiceText: question.pssibleAnswer[3])
-                        }
-                    );
+                    }
                 }
             }
         }
@@ -70,3 +52,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
