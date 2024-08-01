@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    //Delcare instance
+    let question = Question(questionText: "What was the first computer bug?", pssibleAnswer: ["Ant", "Beetle", "Moth", "Fly"], correctAnswerIndex: 2)
+    
     //Define constant variable for colors
     let mainColor = Color(red: 20/255, green: 28/255, blue: 58/255)
     let accentColor = Color(red: 48/255, green: 105/255, blue: 240/255)
@@ -16,61 +19,45 @@ struct ContentView: View {
         ZStack{
             mainColor.ignoresSafeArea()
             VStack{
+                //Question Number
                 Text("1 / 10")
                     .font(.callout)
                     .multilineTextAlignment(.leading)
                     .padding()
-                Text("What was the first computer bug?")
+                //Question
+                Text(question.questionText)
                     .font(.largeTitle)
                     .bold()
                     .multilineTextAlignment(.leading)
+                //Spacer
                 Spacer()
+                //Answer Start
                 HStack{
                     //Button 1
                     Button(
                     action: { print("Wrong Answer") },
                     label: {
-                        Text("Ant")
-                            .font(.body)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .border(accentColor, width: 4)
+                        ChoiceTextView(choiceText: question.pssibleAnswer[0])
                         }
                     );
                     //Button 2
                     Button(
                         action: { print("Wrong Answer") },
                         label: {
-                            Text("Beetle")
-                                .font(.body)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .border(accentColor, width: 4)
+                            ChoiceTextView(choiceText: question.pssibleAnswer[1])
                         }
                     );
                     //Button 3
                     Button(
                         action: { print("Correct!") },
                         label: {
-                            Text("Moth")
-                                .font(.body)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .border(accentColor, width: 4)
+                            ChoiceTextView(choiceText: question.pssibleAnswer[2])
                         }
                     );
                     Button(
                         action: { print("Wrong Answer") },
                         label: {
-                            Text("Fly")
-                                .font(.body)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .border(accentColor, width: 4)
+                            ChoiceTextView(choiceText: question.pssibleAnswer[3])
                         }
                     );
                 }
