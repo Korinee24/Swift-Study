@@ -1,9 +1,3 @@
-//
-//  ChoiceTextView.swift
-//  QuestionAnswer
-//
-//  Created by 김경완 on 8/1/24.
-//
 
 import SwiftUI
 
@@ -18,7 +12,7 @@ struct ChoiceTextView: View {
             .bold()
             .multilineTextAlignment(.center)
             .padding()
-            .border(accentColor, width: 4)
+            .border(GameColor.accent, width: 4)
     }
 }
 

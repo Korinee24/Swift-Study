@@ -1,9 +1,3 @@
-//
-//  QuestionAnswerTests.swift
-//  QuestionAnswerTests
-//
-//  Created by 김경완 on 7/25/24.
-//
 
 import XCTest
 @testable import QuestionAnswer
