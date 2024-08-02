@@ -1,2 +1,4 @@
 # Swift-Study
-Swift Study Projects
+All codes come from CodeCademy Career Path
+
+Will update when I finished class
