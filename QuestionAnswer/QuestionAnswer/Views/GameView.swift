@@ -1,47 +1,25 @@
 import SwiftUI
 
 struct GameView: View {
-    //Delcare instance
-    let question = Question(
-        questionText: "What was the first computer bug?",
-        possibleAnswer: ["Ant", "Beetle", "Moth", "Fly"],
-        correctAnswerIndex: 2)
-    
-    //Define constant variable for colors
-    @State var mainColor = Color(red: 20/255, green: 28/255, blue: 58/255)
-    let accentColor = Color(red: 48/255, green: 105/255, blue: 240/255)
+    @StateObject var viewModel = GameViewModel()
     
     var body: some View {
         ZStack{
-            mainColor.ignoresSafeArea()
+            GameColor.main.ignoresSafeArea()
             VStack{
-                //Question Number
-                Text("1 / 10")
+                Text(viewModel.questionProgressText)
                     .font(.callout)
                     .multilineTextAlignment(.leading)
                     .padding()
-                //Question
-                Text(question.questionText)
-                    .font(.largeTitle)
-                    .bold()
-                    .multilineTextAlignment(.leading)
-                //Spacer
-                Spacer()
-                //Answer Start
-                HStack{
-                    //Answer button refactor 2
-                    ForEach(0..<question.possibleAnswer.count) { answerIndex in
-                        Button(action: {
-                            print("Tapped on option with the text: \(question.possibleAnswer[answerIndex])")
-                          mainColor = answerIndex == question.correctAnswerIndex ? .green : .red
-                        }) {
-                            ChoiceTextView(choiceText: question.possibleAnswer[answerIndex])
-                        }
-                    }
-                }
+                QuestionView(question: viewModel.currentQuestion)
             }
         }
         .foregroundColor(.white) // Text Color Set To White
+        .environmentObject(viewModel)
+        .background(
+            NavigationLink(destination: ScoreView(viewModel: ScoreViewModel(correctGuesses: viewModel.correctGuesses, incorrectGuesses: viewModel.incorrectGuesses)), isActive: .constant(viewModel.gameIsOver),
+                           label: {EmptyView()})
+        )
     }
 }
 
